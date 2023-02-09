@@ -1,0 +1,15 @@
+# IntelliJ
+**/.idea
+**/target
+
+# VSCode
+**/.vscode
+
+# Quarto
+**/_site
+
+# Java outputs
+**/target
+
+# Vim
+**/*.swp
