@@ -22,18 +22,25 @@ public class GamesCollection {
     }
 
     // Public methods
+    public void addGame(String gameID) {
+        this.gamesCollection.add(gameID);
+    }
+
     public void addGame(BoardGame boardGame) {
-        // Use the boardGame ID as the hashmap key
-        this.gamesCollection.add(boardGame.getGameID());
+        this.addGame(boardGame.getGameID());
+    }
+
+    public void deleteGame(String gameID) {
+        // Only try to remove the BoardGame if its gameId exists
+        if (this.gamesCollection.contains(gameID)) {
+            this.gamesCollection.remove(gameID);
+        } else {
+            System.out.println("Game " + gameID + " is not included in the collection, can't remove it!");
+        }
     }
 
     public void deleteGame(BoardGame boardGame) {
-        // Only try to remove the BoardGame if its gameId exists
-        if (this.gamesCollection.contains(boardGame.getGameID())) {
-            this.gamesCollection.remove(boardGame.getGameID());
-        } else {
-            System.out.println("Game " + boardGame.getGameTitle() + " is not included in the collection, can't remove it!");
-        }
+        this.deleteGame(boardGame.getGameID());
     }
 
     public boolean hasGame(BoardGame boardGame) {
