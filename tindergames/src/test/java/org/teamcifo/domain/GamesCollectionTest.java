@@ -61,21 +61,6 @@ class GamesCollectionTest {
     }
 
     @Test
-    void updateGame() {
-        // Add a full list of fake boardgames to the collection
-        this.fakeBoardGames1
-                .forEach(boardGame -> this.collectionTest1.addGame((boardGame)));
-        // Get a random game from the collection
-        int randomInt = this.random.nextInt(0, 10);
-        BoardGame gameToUpdate = this.fakeBoardGames1.get(randomInt);
-        // Update some attributes from the game
-        gameToUpdate.setGameTitle("New title");
-        this.collectionTest1.updateGame(gameToUpdate);
-        // Assert that the game in the GamesCollection object has been updated
-        assertEquals(gameToUpdate, this.collectionTest1.getGame(gameToUpdate.getGameID()));
-    }
-
-    @Test
     void hasGame() {
         // Add a full list of fake boardgames to the collection
         this.fakeBoardGames1
@@ -117,7 +102,5 @@ class GamesCollectionTest {
                 .forEach(boardGame -> this.collectionTest2.addGame((boardGame)));
         // Assert that the Games Collection are now different
         assertNotEquals(this.collectionTest1, this.collectionTest2);
-        // TODO: Test the equals method by creating a new BoardGame object with
-        //  the same values as an existing one (i.e: same BoardGame info in different objects)
     }
 }

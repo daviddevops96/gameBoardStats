@@ -5,53 +5,56 @@ import lombok.Getter;
 import lombok.Setter;
 import org.teamcifo.utils.Helpers;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Getter
 @Setter
 public class GamesCollection {
     private String collectionId;
-    private Map<String, BoardGame> gamesCollection;
+    private Set<String> gamesCollection;
 
     public GamesCollection() {
         // The collection ID is generated on creation time
         this.collectionId = Helpers.generateUUID();
-        this.gamesCollection = new HashMap<>();
+        this.gamesCollection = new HashSet<>();
     }
 
     // Public methods
-    public void addGame(BoardGame boardGame) {
-        // Use the boardGame ID as the hashmap key
-        this.gamesCollection.putIfAbsent(boardGame.getGameID(), boardGame);
+    public void addGame(String gameID) {
+        this.gamesCollection.add(gameID);
     }
 
-    public void deleteGame(BoardGame boardGame) {
+    public void addGame(BoardGame boardGame) {
+        this.addGame(boardGame.getGameID());
+    }
+
+    public void deleteGame(String gameID) {
         // Only try to remove the BoardGame if its gameId exists
-        if (this.gamesCollection.containsKey(boardGame.getGameID())) {
-            this.gamesCollection.remove(boardGame.getGameID());
+        if (this.gamesCollection.contains(gameID)) {
+            this.gamesCollection.remove(gameID);
         } else {
-            System.out.println("Game " + boardGame.getGameTitle() + " is not included in the collection, can't remove it!");
+            System.out.println("Game " + gameID + " is not included in the collection, can't remove it!");
         }
     }
 
-    public void updateGame(BoardGame boardGame) {
-        // Don't check if the game already exists in the collection, just put it in
-        this.gamesCollection.put(boardGame.getGameID(), boardGame);
-    }
-
-    public BoardGame getGame(String boardGameID) {
-        return this.gamesCollection.getOrDefault(boardGameID, null);
+    public void deleteGame(BoardGame boardGame) {
+        this.deleteGame(boardGame.getGameID());
     }
 
     public boolean hasGame(BoardGame boardGame) {
-        // Check that the collection has an entry with the same game ID and BoardGame as the input one
-        return gamesCollection.containsKey(boardGame.getGameID()) && gamesCollection.get(boardGame.getGameID()).equals(boardGame);
+        // Check that the collection has an entry with the same game ID
+        return this.hasGame(boardGame.getGameID());
     }
 
-    public void copyFrom(Map<String, BoardGame> gamesCollection) {
-        this.gamesCollection.putAll(gamesCollection);
+    public boolean hasGame(String gameID) {
+        // Check that the collection has an entry with the same game ID
+        return this.gamesCollection.contains(gameID);
+    }
+
+    public void copyFrom(Set<String> gamesCollection) {
+        this.gamesCollection.addAll(gamesCollection);
     }
 
     public int size() {
@@ -69,9 +72,6 @@ public class GamesCollection {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GamesCollection that = (GamesCollection) o;
-        // TODO: BoardGame requires an "equals" overridden method
         return getGamesCollection().equals(that.getGamesCollection());
     }
-
-
 }
