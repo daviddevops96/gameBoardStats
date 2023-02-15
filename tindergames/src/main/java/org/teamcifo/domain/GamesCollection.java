@@ -55,6 +55,7 @@ public class GamesCollection {
 
     public void copyFrom(Map<String, GameStats> gamesCollection) {
         // TODO: If we copy an entire collection, we're also copying the GameStats of the previous user
+        // TODO: Do we really need this method? Right now it is only used in tests
         this.gamesCollection.putAll(gamesCollection);
     }
 
