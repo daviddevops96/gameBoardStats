@@ -4,6 +4,7 @@ import org.teamcifo.domain.GamesCollection;
 
 public class UserManager {
     public static GamesCollection getGamesCollection(String userID) {
-        return null;
+        // TODO: Correctly access the userID gamesCollection once User class is implemented
+        return new GamesCollection();
     }
 }
