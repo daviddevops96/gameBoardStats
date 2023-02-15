@@ -5,25 +5,25 @@ import lombok.Getter;
 import lombok.Setter;
 import org.teamcifo.utils.Helpers;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 @Data
 @Getter
 @Setter
 public class GamesCollection {
     private String collectionId;
-    private Set<String> gamesCollection;
+    private Map<String, GameStats> gamesCollection;
 
     public GamesCollection() {
         // The collection ID is generated on creation time
         this.collectionId = Helpers.generateUUID();
-        this.gamesCollection = new HashSet<>();
+        this.gamesCollection = new HashMap<>();
     }
 
     // Public methods
     public void addGame(String gameID) {
-        this.gamesCollection.add(gameID);
+        this.gamesCollection.put(gameID, new GameStats());
     }
 
     public void addGame(BoardGame boardGame) {
@@ -32,7 +32,7 @@ public class GamesCollection {
 
     public void deleteGame(String gameID) {
         // Only try to remove the BoardGame if its gameId exists
-        if (this.gamesCollection.contains(gameID)) {
+        if (this.hasGame(gameID)) {
             this.gamesCollection.remove(gameID);
         } else {
             System.out.println("Game " + gameID + " is not included in the collection, can't remove it!");
@@ -50,11 +50,12 @@ public class GamesCollection {
 
     public boolean hasGame(String gameID) {
         // Check that the collection has an entry with the same game ID
-        return this.gamesCollection.contains(gameID);
+        return this.gamesCollection.containsKey(gameID);
     }
 
-    public void copyFrom(Set<String> gamesCollection) {
-        this.gamesCollection.addAll(gamesCollection);
+    public void copyFrom(Map<String, GameStats> gamesCollection) {
+        // TODO: If we copy an entire collection, we're also copying the GameStats of the previous user
+        this.gamesCollection.putAll(gamesCollection);
     }
 
     public int size() {
