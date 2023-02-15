@@ -45,7 +45,12 @@ public class GamesCollection {
 
     public boolean hasGame(BoardGame boardGame) {
         // Check that the collection has an entry with the same game ID
-        return this.gamesCollection.contains(boardGame.getGameID());
+        return this.hasGame(boardGame.getGameID());
+    }
+
+    public boolean hasGame(String gameID) {
+        // Check that the collection has an entry with the same game ID
+        return this.gamesCollection.contains(gameID);
     }
 
     public void copyFrom(Set<String> gamesCollection) {
