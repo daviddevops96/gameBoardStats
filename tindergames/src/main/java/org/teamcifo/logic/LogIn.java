@@ -23,13 +23,23 @@ public class LogIn {
             String choice = scanner.nextLine();
 
             switch (choice) {
-                case "1":
+                case "1" :
+                case "Log in":
+                case "Login":
+                case "log in":
+                case "login":
                     login();
                     break;
                 case "2":
+                case "Register":
+                case "register":
                     register();
                     break;
                 case "3":
+                case "Exit":
+                case "exit":
+                case "Quit":
+                case "quit":
                     System.out.println("Goodbye!");
                     return;
                 default:
@@ -107,6 +117,7 @@ public class LogIn {
 
     private void viewGames() {
         // Display the user's game collection
+
     }
 
     private void addGame() {

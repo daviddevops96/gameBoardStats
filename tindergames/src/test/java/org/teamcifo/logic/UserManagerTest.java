@@ -2,12 +2,16 @@ package org.teamcifo.logic;
 
 import static org.junit.jupiter.api.Assertions.*;
 import com.github.javafaker.Faker;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.teamcifo.domain.User;
 import java.util.HashMap;
 import java.util.Map;
 
 public class UserManagerTest {
+    private UserManager userManager;
+    private Faker faker;
     @Test
     public void testAddUserAndGetUser() {
         // Create an instance of the Faker library to generate fake data
@@ -50,6 +54,11 @@ public class UserManagerTest {
         // Authenticate the user and check that the result is true
         boolean result = userManager.authenticate(fakeId, fakePassword);
         assertTrue(result);
+
+        //
+        Assertions.assertTrue(userManager.authenticate(user.getUserId(), user.getPassword()));
+        Assertions.assertFalse(userManager.authenticate(user.getUserId(), "wrong password"));
+        Assertions.assertFalse(userManager.authenticate("non-existent user ID", "password"));
     }
 
     @Test
@@ -74,4 +83,82 @@ public class UserManagerTest {
         assertEquals(users,retrievedUsers);
 
     }
+
+    //More tests
+    @BeforeEach
+    void setUp() {
+        userManager = new UserManager();
+        faker = new Faker();
+    }
+
+    @Test
+    void testAddUser() {
+        User user = new User();
+        user.setUserId(faker.number().digits(10));
+        user.setName(faker.name().firstName());
+        user.setLastName(faker.name().lastName());
+        user.setEmail(faker.internet().emailAddress());
+        user.setPassword(faker.internet().password());
+
+        userManager.addUser(user);
+        Map<String, User> users = userManager.getAllUsers();
+        Assertions.assertEquals(1, users.size());
+        Assertions.assertEquals(user, users.get(user.getUserId()));
+    }
+
+    @Test
+    void testGetUser() {
+        User user = new User();
+        user.setUserId(faker.number().digits(10));
+        user.setName(faker.name().firstName());
+        user.setLastName(faker.name().lastName());
+        user.setEmail(faker.internet().emailAddress());
+        user.setPassword(faker.internet().password());
+
+        userManager.addUser(user);
+
+        Assertions.assertEquals(user, userManager.getUser(user.getUserId()));
+        Assertions.assertNull(userManager.getUser("non-existent user ID"));
+    }
+@Test
+    void testUpdateUser() {
+        User user = new User();
+        user.setUserId(faker.number().digits(10));
+        user.setName(faker.name().firstName());
+        user.setLastName(faker.name().lastName());
+        user.setEmail(faker.internet().emailAddress());
+        user.setPassword(faker.internet().password());
+
+        userManager.addUser(user);
+
+        User updatedUser = new User();
+        updatedUser.setUserId(user.getUserId());
+        updatedUser.setName(faker.name().firstName());
+        updatedUser.setLastName(faker.name().lastName());
+        updatedUser.setEmail(faker.internet().emailAddress());
+        updatedUser.setPassword(faker.internet().password());
+
+        userManager.updateUser(updatedUser);
+
+        Assertions.assertEquals(updatedUser, userManager.getUser(user.getUserId()));
+    }
+
+    @Test
+    void testDeleteUser() {
+        User user = new User();
+        user.setUserId(faker.number().digits(10));
+        user.setName(faker.name().firstName());
+        user.setLastName(faker.name().lastName());
+        user.setEmail(faker.internet().emailAddress());
+        user.setPassword(faker.internet().password());
+
+        userManager.addUser(user);
+
+        userManager.deleteUser(user.getUserId());
+
+        Assertions.assertNull(userManager.getUser(user.getUserId()));
+        Assertions.assertEquals(0, userManager.getAllUsers().size());
+    }
+
+
 }
