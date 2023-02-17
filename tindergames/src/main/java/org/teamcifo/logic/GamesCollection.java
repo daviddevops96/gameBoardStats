@@ -1,4 +1,4 @@
-package org.teamcifo.domain;
+package org.teamcifo.logic;
 
 import lombok.Data;
 import lombok.Getter;

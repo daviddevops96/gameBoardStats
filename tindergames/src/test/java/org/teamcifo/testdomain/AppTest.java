@@ -1,12 +1,10 @@
 package org.teamcifo;
 
 import org.junit.jupiter.api.Test;
-import org.teamcifo.domain.*;
-import org.teamcifo.utils.*;
+import org.teamcifo.logic.BoardGame;
 import org.teamcifo.utils.*;
 import com.github.javafaker.Faker;
 import static org.junit.jupiter.api.Assertions.*;
-import java.util.Random;
 
 
 public class AppTest {

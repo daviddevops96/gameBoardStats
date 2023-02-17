@@ -1,7 +1,9 @@
-package org.teamcifo.domain;
+package org.teamcifo.testdomain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.teamcifo.logic.BoardGame;
+import org.teamcifo.logic.GamesCollection;
 import org.teamcifo.testutils.FakeDataGenerator;
 
 import java.util.List;

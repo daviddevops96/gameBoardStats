@@ -1,12 +1,16 @@
-package org.teamcifo.domain;
+package org.teamcifo.testdomain;
 
 import org.junit.jupiter.api.Test;
-import org.teamcifo.domain.*;
-import org.teamcifo.utils.*;
+import org.teamcifo.logic.BoardGame;
+import org.teamcifo.testutils.FakeDataGenerator;
 import org.teamcifo.utils.*;
 import com.github.javafaker.Faker;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
-import java.util.Random;
+
 public class CreateBoardGameTest {
     //first approach. More to-do
     @Test
@@ -18,19 +22,16 @@ public class CreateBoardGameTest {
     }
     @Test
     public  void createMultipleBoardgames(int number){
-        Faker faker = new Faker();
-        BoardGame newBoardgame;
+
+        List<BoardGame> boardGamesList = new ArrayList<>();
+        BoardGame gameForTesting = new BoardGame();
 
         for (int i = 0; i < number; i++){
-            newBoardgame = new BoardGame();
-
-            String gameID = Helpers.generateUUID();
-            String gameTitle = faker.rockBand().name();
-            newBoardgame.setGameID(gameID);
-            newBoardgame.setGameTitle(gameTitle);
+            gameForTesting = FakeDataGenerator.createFakeGame();
+            boardGamesList.add(gameForTesting);
         }
+        //System.out.println(boardGamesList);
     }
-
     @Test
     public void createFakeBoardGames(){
         createMultipleBoardgames(10);
