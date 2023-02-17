@@ -2,7 +2,6 @@ package org.teamcifo.domain;
 
 import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 import org.teamcifo.utils.Helpers;
 
 import java.util.HashMap;
@@ -10,37 +9,51 @@ import java.util.Map;
 
 @Data
 @Getter
-@Setter
 public class GamesCollection {
     private String collectionId;
-    private Map<String, GameStats> gamesCollection;
+    private Map<String, GameStats> gameStatuses; // Keys are gameIDs
 
     public GamesCollection() {
         // The collection ID is generated on creation time
         this.collectionId = Helpers.generateUUID();
-        this.gamesCollection = new HashMap<>();
+        this.gameStatuses = new HashMap<>();
     }
 
     // Public methods
-    public void addGame(String gameID) {
-        this.gamesCollection.put(gameID, new GameStats());
+    // - CRUD operations
+    public void addGameToCollection(String gameID) {
+        this.gameStatuses.putIfAbsent(gameID, new GameStats());
     }
 
-    public void addGame(BoardGame boardGame) {
-        this.addGame(boardGame.getGameID());
+    public void addGameToCollection(BoardGame boardGame) {
+        this.addGameToCollection(boardGame.getGameID());
     }
 
-    public void deleteGame(String gameID) {
+    public GameStats getGameStats(String gameID) {
+        return this.gameStatuses.getOrDefault(gameID, null);
+    }
+
+    public void updateGameStats(String gameID, GameStats newStats) {
+        this.gameStatuses.put(gameID, newStats);
+    }
+
+    public void deleteGameFromCollection(String gameID) {
         // Only try to remove the BoardGame if its gameId exists
         if (this.hasGame(gameID)) {
-            this.gamesCollection.remove(gameID);
+            this.gameStatuses.remove(gameID);
         } else {
             System.out.println("Game " + gameID + " is not included in the collection, can't remove it!");
         }
     }
 
-    public void deleteGame(BoardGame boardGame) {
-        this.deleteGame(boardGame.getGameID());
+    public void deleteGameFromCollection(BoardGame boardGame) {
+        this.deleteGameFromCollection(boardGame.getGameID());
+    }
+
+
+    // - Check methods
+    public int size() {
+        return this.gameStatuses.size();
     }
 
     public boolean hasGame(BoardGame boardGame) {
@@ -50,16 +63,20 @@ public class GamesCollection {
 
     public boolean hasGame(String gameID) {
         // Check that the collection has an entry with the same game ID
-        return this.gamesCollection.containsKey(gameID);
+        return this.gameStatuses.containsKey(gameID);
     }
 
+    // - Print methods
+    public void printGameStats(String gameID) {
+        // Print the gameID stats
+        System.out.println(this.gameStatuses.getOrDefault(gameID, null));
+    }
+
+    // - Manipulation between collections
     public void copyFrom(Map<String, GameStats> gamesCollection) {
         // TODO: If we copy an entire collection, we're also copying the GameStats of the previous user
-        this.gamesCollection.putAll(gamesCollection);
-    }
-
-    public int size() {
-        return this.gamesCollection.size();
+        // TODO: Do we really need this method? Right now it is only used in tests
+        this.gameStatuses.putAll(gamesCollection);
     }
 
     // Methods override
@@ -73,6 +90,20 @@ public class GamesCollection {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GamesCollection that = (GamesCollection) o;
-        return getGamesCollection().equals(that.getGamesCollection());
+        return getGameStatuses().equals(that.getGameStatuses());
     }
+
+    @Override
+    public String toString() {
+        StringBuilder collectionStr = new StringBuilder();
+
+        collectionStr.append("Collection ID: ").append(this.getCollectionId());
+        collectionStr.append(System.getProperty("line.separator"));
+        collectionStr.append("Number of games:\t").append(this.size());
+
+        return collectionStr.toString();
+    }
+
+    // Private methods
+
 }
