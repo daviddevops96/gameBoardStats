@@ -49,9 +49,10 @@ public class UserTest {
     @Test
     public void testAllArgsConstructor() {
         Faker faker = new Faker();
-        // Test that the all-args constructor creates a non-null user object
+        //Test that the all-args constructor creates a non-null user object
         User user = new User(faker.name().firstName(), faker.name().lastName(), faker.internet().emailAddress(),
                 faker.internet().password(), faker.number().digits(10), new GamesCollection(), new ArrayList<GamePlay>());
+
         assertNotNull(user);
     }
 
@@ -61,6 +62,7 @@ public class UserTest {
         // Test that the toString() method does not return null
         User user = new User(faker.name().firstName(), faker.name().lastName(), faker.internet().emailAddress(),
                 faker.internet().password(), faker.number().digits(10), new GamesCollection(), new ArrayList<GamePlay>());
+
         assertNotNull(user.toString());
     }
 

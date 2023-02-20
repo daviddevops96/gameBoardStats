@@ -10,13 +10,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserManagerTest {
-    private UserManager userManager;
+    //private UserManager userManager;
     private Faker faker;
     @Test
     public void testAddUserAndGetUser() {
         // Create an instance of the Faker library to generate fake data
-        Faker faker = new Faker();
-        UserManager userManager = new UserManager();
+
+        //UserManager userManager = new UserManager();
         User user = new User();
         String fakeId = faker.number().digits(10);
         user.setUserId(fakeId);
@@ -26,17 +26,19 @@ public class UserManagerTest {
         user.setPassword(faker.internet().password());
 
         // Add the user to the user manager
-        userManager.addUser(user);
+        UserManager.addUser(user);
+        //userManager.addUser(user);
 
         // Get the user from the user manager and check that it is the same as the user that was added
-        User retrievedUser = userManager.getUser(fakeId);
+        //User retrievedUser = userManager.getUser(fakeId);
+        User retrievedUser = UserManager.getUser(fakeId);
         assertEquals(user, retrievedUser);
     }
 
     @Test
     public void testAuthenticate() {
         // Create an instance of the Faker library to generate fake data
-        Faker faker = new Faker();
+
         UserManager userManager = new UserManager();
         User user = new User();
         String fakeId = faker.number().digits(10);
@@ -46,11 +48,11 @@ public class UserManagerTest {
         user.setEmail(faker.internet().emailAddress());
         String fakePassword = faker.internet().password();
         user.setPassword(fakePassword);
-
+        System.out.println(user);
 
         // Add the user to the user manager
-        userManager.addUser(user);
-
+        //userManager.addUser(user);
+        UserManager.addUser(user);
         // Authenticate the user and check that the result is true
         boolean result = userManager.authenticate(fakeId, fakePassword);
         assertTrue(result);
@@ -64,9 +66,11 @@ public class UserManagerTest {
     @Test
     public void testGetAllUsers() {
         // Create an instance of the Faker library to generate fake data
-        Faker faker = new Faker();
-        UserManager userManager = new UserManager();
+
+        //UserManager userManager = new UserManager();
         Map<String,User> users = new HashMap<>();
+
+
         for (int i = 0; i < 10; i++) {
             User user = new User();
             user.setUserId(faker.number().digits(10));
@@ -75,19 +79,21 @@ public class UserManagerTest {
             user.setEmail(faker.internet().emailAddress());
             user.setPassword(faker.internet().password());
             users.put(user.getUserId(),user);
-            userManager.addUser(user);
+            //userManager.addUser(user);
+            UserManager.addUser(user);
         }
 
         // Get the list of all users from the user manager and check that it is the same as the list of users that was created
-        Map<String,User> retrievedUsers = userManager.getAllUsers();
-        assertEquals(users,retrievedUsers);
+        Map<String,User> retrievedUsers = UserManager.getAllUsers();
+        //assertEquals(users,retrievedUsers);
+        assertEquals(users,UserManager.getAllUsers());
 
     }
 
     //More tests
     @BeforeEach
     void setUp() {
-        userManager = new UserManager();
+
         faker = new Faker();
     }
 
@@ -100,10 +106,18 @@ public class UserManagerTest {
         user.setEmail(faker.internet().emailAddress());
         user.setPassword(faker.internet().password());
 
-        userManager.addUser(user);
-        Map<String, User> users = userManager.getAllUsers();
-        Assertions.assertEquals(1, users.size());
-        Assertions.assertEquals(user, users.get(user.getUserId()));
+        //userManager.addUser(user);
+
+        UserManager.addUser(user);
+        System.out.println(UserManager.getAllUsers());
+        //Map<String, User> users = userManager.getAllUsers();
+
+        // ojo Map<String, User> users = UserManager.getAllUsers();
+
+        //Assertions.assertEquals(1, users.size());
+        //Assertions.assertEquals(user, users.get(user.getUserId()));
+        Assertions.assertEquals(1, UserManager.getAllUsers().size());//should be 1 but when I pass the global test it was 2
+        Assertions.assertEquals(user, UserManager.getUser(user.getUserId()));
     }
 
     @Test
@@ -115,12 +129,15 @@ public class UserManagerTest {
         user.setEmail(faker.internet().emailAddress());
         user.setPassword(faker.internet().password());
 
-        userManager.addUser(user);
+        //userManager.addUser(user);
+        UserManager.addUser(user);
 
-        Assertions.assertEquals(user, userManager.getUser(user.getUserId()));
-        Assertions.assertNull(userManager.getUser("non-existent user ID"));
+        //Assertions.assertEquals(user, userManager.getUser(user.getUserId()));
+        //Assertions.assertNull(userManager.getUser("non-existent user ID"));
+        Assertions.assertEquals(user, UserManager.getUser(user.getUserId()));
+        Assertions.assertNull(UserManager.getUser("non-existent user ID"));
     }
-@Test
+    @Test
     void testUpdateUser() {
         User user = new User();
         user.setUserId(faker.number().digits(10));
@@ -129,7 +146,8 @@ public class UserManagerTest {
         user.setEmail(faker.internet().emailAddress());
         user.setPassword(faker.internet().password());
 
-        userManager.addUser(user);
+        //userManager.addUser(user);
+        UserManager.addUser(user);
 
         User updatedUser = new User();
         updatedUser.setUserId(user.getUserId());
@@ -138,9 +156,11 @@ public class UserManagerTest {
         updatedUser.setEmail(faker.internet().emailAddress());
         updatedUser.setPassword(faker.internet().password());
 
-        userManager.updateUser(updatedUser);
+        //userManager.updateUser(updatedUser);
+        UserManager.updateUser(updatedUser);
 
-        Assertions.assertEquals(updatedUser, userManager.getUser(user.getUserId()));
+        //Assertions.assertEquals(updatedUser, userManager.getUser(user.getUserId()));
+        Assertions.assertEquals(updatedUser, UserManager.getUser(user.getUserId()));
     }
 
     @Test
@@ -152,12 +172,16 @@ public class UserManagerTest {
         user.setEmail(faker.internet().emailAddress());
         user.setPassword(faker.internet().password());
 
-        userManager.addUser(user);
+        //userManager.addUser(user);
+        UserManager.addUser(user);
 
-        userManager.deleteUser(user.getUserId());
+        //userManager.deleteUser(user.getUserId());
+        UserManager.deleteUser(user.getUserId());
 
-        Assertions.assertNull(userManager.getUser(user.getUserId()));
-        Assertions.assertEquals(0, userManager.getAllUsers().size());
+        //Assertions.assertNull(userManager.getUser(user.getUserId()));
+        //Assertions.assertEquals(0, userManager.getAllUsers().size());
+        Assertions.assertNull(UserManager.getUser(user.getUserId()));
+        Assertions.assertEquals(0, UserManager.getAllUsers().size());
     }
 
 
