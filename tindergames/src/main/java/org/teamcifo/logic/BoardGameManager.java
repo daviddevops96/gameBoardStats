@@ -51,12 +51,13 @@ public class BoardGameManager {
         // Will update the game from the DB
         game.setMinPlayTime(maxPlayTime);
     }
-
+    // TODO:
     public static void searchBoardGame(String gameTitle){
         // will search the desired boardgame and shows it to user.
         // boardgame will be found on the Board Games DB
     }
 
+    // TODO:
     public static void listAllBoardgames(){
         // the user can browse the whole boardGames DB.
         // Some sorting can be defined if wanted
