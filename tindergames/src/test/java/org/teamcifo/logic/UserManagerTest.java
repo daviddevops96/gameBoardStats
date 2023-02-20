@@ -93,7 +93,7 @@ public class UserManagerTest {
     //More tests
     @BeforeEach
     void setUp() {
-
+        UserManager.Clear();
         faker = new Faker();
     }
 

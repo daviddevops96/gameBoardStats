@@ -50,6 +50,10 @@ public class UserManager{
     }
 
     public static Map<String,User> getAllUsers() { return users; }
+
+    public static void Clear(){
+        users.clear();
+    }
 }
 
 
