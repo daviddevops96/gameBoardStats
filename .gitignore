@@ -1,7 +1,8 @@
 # IntelliJ
 **/.idea
 **/target
-
+**/._*
+**/*.iml
 # VSCode
 **/.vscode
 
