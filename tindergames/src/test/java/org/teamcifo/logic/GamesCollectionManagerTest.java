@@ -4,13 +4,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.teamcifo.domain.GamesCollection;
-import org.teamcifo.testutils.FakeDataGenerator;
+import org.teamcifo.utils.FakeDataGenerator;
 import org.teamcifo.utils.Helpers;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;

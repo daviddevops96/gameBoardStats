@@ -2,7 +2,7 @@ package org.teamcifo.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.teamcifo.testutils.FakeDataGenerator;
+import org.teamcifo.utils.FakeDataGenerator;
 
 import java.util.List;
 import java.util.Random;

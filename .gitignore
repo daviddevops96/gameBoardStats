@@ -1,15 +1,13 @@
 # IntelliJ
 **/.idea
 **/target
-
+**/._*
+**/*.iml
 # VSCode
 **/.vscode
 
 # Quarto
 **/_site
-
-# Java outputs
-**/target
 
 # Vim
 **/*.swp
