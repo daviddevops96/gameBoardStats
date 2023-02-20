@@ -1,5 +1,7 @@
 package org.teamcifo.logic;
 
+import org.teamcifo.domain.BoardGame;
+
 public class BoardGameManager {
     // we need how to decide how to storage boardgames
 

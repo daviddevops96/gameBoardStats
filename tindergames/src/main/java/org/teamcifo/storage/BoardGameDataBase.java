@@ -1,5 +1,5 @@
 package org.teamcifo.storage;
-import org.teamcifo.logic.BoardGame;
+import org.teamcifo.domain.BoardGame;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,10 +1,9 @@
-package org.teamcifo.testlogic;
+package org.teamcifo.logic;
 
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
-import org.teamcifo.logic.BoardGame;
-import org.teamcifo.logic.BoardGameManager;
-import org.teamcifo.testutils.FakeDataGenerator;
+import org.teamcifo.domain.BoardGame;
+import org.teamcifo.utils.FakeDataGenerator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

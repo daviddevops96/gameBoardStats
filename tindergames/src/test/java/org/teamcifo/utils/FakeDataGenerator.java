@@ -1,9 +1,8 @@
-package org.teamcifo.testutils;
+package org.teamcifo.utils;
 
 import com.github.javafaker.Faker;
-import org.teamcifo.logic.BoardGame;
-import org.teamcifo.logic.User;
-import org.teamcifo.utils.Helpers;
+import org.teamcifo.domain.BoardGame;
+import org.teamcifo.domain.User;
 
 import java.util.ArrayList;
 import java.util.List;

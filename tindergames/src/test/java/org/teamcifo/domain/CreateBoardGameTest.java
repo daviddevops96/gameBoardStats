@@ -1,8 +1,7 @@
-package org.teamcifo.testdomain;
+package org.teamcifo.domain;
 
 import org.junit.jupiter.api.Test;
-import org.teamcifo.logic.BoardGame;
-import org.teamcifo.testutils.FakeDataGenerator;
+import org.teamcifo.utils.FakeDataGenerator;
 import org.teamcifo.utils.*;
 import com.github.javafaker.Faker;
 

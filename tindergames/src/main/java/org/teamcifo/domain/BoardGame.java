@@ -1,4 +1,4 @@
-package org.teamcifo.logic;
+package org.teamcifo.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package org.teamcifo.logic;
+package org.teamcifo.domain;
 
 public class User {
 }
