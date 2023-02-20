@@ -1,6 +1,5 @@
 package org.teamcifo.logic;
 
-
 import lombok.Data;
 import lombok.Getter;
 import lombok.AllArgsConstructor;
@@ -9,7 +8,7 @@ import lombok.Setter;
 import java.util.HashMap;
 import java.util.Map;
 import org.teamcifo.domain.*;;
-
+import org.teamcifo.domain.GamesCollection;
 
 @Data
 @AllArgsConstructor
@@ -24,6 +23,9 @@ public class UserManager{
         this.users= new HashMap<>();
     }
 */
+    public static GamesCollection getGamesCollection(String userID) {
+        return null;
+    }
     public static void addUser(User user) {
 
         users.put(user.getUserId(), user);
@@ -55,5 +57,6 @@ public class UserManager{
         users.clear();
     }
 }
+
 
 
