@@ -19,13 +19,8 @@ public class UserManager{
 
     private static Map<String, User> users = new HashMap<>();
 
-    /*
-    public UserManager(){
-        this.users= new HashMap<>();
-    }
-*/
-    public static void addUser(User user) {
 
+    public static void addUser(User user) {
         users.put(user.getUserId(), user);
     }
 
@@ -51,7 +46,7 @@ public class UserManager{
 
     public static Map<String,User> getAllUsers() { return users; }
 
-    public static void Clear(){
+    public static void clear(){
         users.clear();
     }
 }
