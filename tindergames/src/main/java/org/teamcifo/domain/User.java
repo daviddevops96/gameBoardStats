@@ -19,6 +19,4 @@ public class User {
     private GamesCollection userGameCollection;
     private List<GamePlay> gamePlays;
 
-
-
 }
