@@ -1,24 +1,31 @@
 package org.teamcifo.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
 import com.github.javafaker.Faker;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
-
 public class UserTest {
+    private static User user, userNoArgs;
+    private static Faker faker;
 
-    @Test
-    public void testGettersAndSetters() {
-        User user = new User();
-        Faker faker = new Faker();
+    //Faker variables
+    private static String fakeId, fakeName, fakeLastName, fakeEmail, fakePassword;
+
+    @BeforeEach
+    void setUp(){
+        //Init objects
+        user = new User();
+        faker = new Faker();
+        userNoArgs = new User();//to test with a user without parameters
 
         // Generate fake data for the user object
-        String fakeId = faker.number().digits(10);
-        String fakeName = faker.name().firstName();
-        String fakeLastName = faker.name().lastName();
-        String fakeEmail = faker.internet().emailAddress();
-        String fakePassword = faker.internet().password();
+        fakeId = faker.number().digits(10);
+        fakeName = faker.name().firstName();
+        fakeLastName = faker.name().lastName();
+        fakeEmail = faker.internet().emailAddress();
+        fakePassword = faker.internet().password();
 
         // Set the user object's properties with fake data
         user.setUserId(fakeId);
@@ -29,6 +36,24 @@ public class UserTest {
         user.setUserGameCollection(new GamesCollection());
         user.setGamePlays(new ArrayList<GamePlay>());
 
+    }
+
+    @Test
+    public void testAllArgsConstructor() {
+        //Test that the all-args constructor creates a non-null user object
+        assertNotNull(user);
+
+    }
+
+    @Test
+    public void testNoArgsConstructor() {
+        // Test that the no-args constructor creates a non-null user object
+        assertNotNull(userNoArgs);
+
+    }
+
+    @Test
+    public void testGettersAndSetters() {
         // Assert that the user object's properties have been set with the correct fake data
         assertEquals(user.getName(), fakeName);
         assertEquals(user.getLastName(), fakeLastName);
@@ -37,33 +62,14 @@ public class UserTest {
         assertEquals(user.getUserId(), fakeId);
         assertEquals(user.getUserGameCollection(), user.getUserGameCollection());
         assertEquals(user.getGamePlays(), user.getGamePlays());
-    }
 
-    @Test
-    public void testNoArgsConstructor() {
-        // Test that the no-args constructor creates a non-null user object
-        User user = new User();
-        assertNotNull(user);
-    }
-
-    @Test
-    public void testAllArgsConstructor() {
-        Faker faker = new Faker();
-        //Test that the all-args constructor creates a non-null user object
-        User user = new User(faker.name().firstName(), faker.name().lastName(), faker.internet().emailAddress(),
-                faker.internet().password(), faker.number().digits(10), new GamesCollection(), new ArrayList<GamePlay>());
-
-        assertNotNull(user);
     }
 
     @Test
     public void testToString() {
-        Faker faker = new Faker();
         // Test that the toString() method does not return null
-        User user = new User(faker.name().firstName(), faker.name().lastName(), faker.internet().emailAddress(),
-                faker.internet().password(), faker.number().digits(10), new GamesCollection(), new ArrayList<GamePlay>());
-
         assertNotNull(user.toString());
+
     }
 
 }
