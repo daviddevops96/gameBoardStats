@@ -4,18 +4,15 @@ import org.teamcifo.domain.User;
 import java.util.Scanner;
 
 public class LogIn {
-    private UserManager userManager;
-    private Scanner scanner;
+    private static Scanner scanner = new Scanner(System.in);
 
-    public LogIn(UserManager userManager) {
-        //this.authService = authService;
-        this.userManager= userManager;
-        this.scanner = new Scanner(System.in);
+    public static void demo() {
+        // TODO:
+        start();
     }
-
-    public void start() {
+    public static void start() {
         while (true) {
-            System.out.println("Please log in or register:");
+            System.out.println("Please enter option number:");
             System.out.println("1. Log in");
             System.out.println("2. Register");
             System.out.println("3. Exit");
@@ -23,23 +20,13 @@ public class LogIn {
             String choice = scanner.nextLine();
 
             switch (choice) {
-                case "1" :
-                case "Log in":
-                case "Login":
-                case "log in":
-                case "login":
+                case "1":
                     login();
                     break;
                 case "2":
-                case "Register":
-                case "register":
                     register();
                     break;
                 case "3":
-                case "Exit":
-                case "exit":
-                case "Quit":
-                case "quit":
                     System.out.println("Goodbye!");
                     return;
                 default:
@@ -49,45 +36,50 @@ public class LogIn {
         }
     }
 
-    private void login() {
-        System.out.print("Enter your user ID: ");
-        String userId = scanner.nextLine();
+    private static void login() {
+        System.out.print("Enter your username: ");
+        String username = scanner.nextLine();
         System.out.print("Enter your password: ");
         String password = scanner.nextLine();
 
-        if (userManager.authenticate(userId, password)) {
+        if (UserManager.authenticate(username, password)) {
             System.out.println("Login successful.");
-            showMenu();
+            showMenu(username);
         } else {
             System.out.println("Invalid user ID or password.");
         }
     }
 
-    private void register() {
-        User user = new User();
-        System.out.print("Enter your user ID: ");
-        String userId = scanner.nextLine();
+    private static void register() {
+        System.out.print("Enter a username: ");
+        String username = scanner.nextLine();
 
-        System.out.print("Enter your password: ");
-        String password = scanner.nextLine();
+        // Check if user exists based on its username
+        if (UserManager.getUserByUsername(username)==null) {
+            User user = new User();
+            user.setUsername(username);
 
-        System.out.print("Enter your name: ");
-        String name = scanner.nextLine();
+            System.out.print("Enter your first name: ");
+            user.setName(scanner.nextLine());
 
+            System.out.print("Enter your last name: ");
+            user.setLastName(scanner.nextLine());
 
-        if (userManager.getUser(userId)==null) {
-            user.setUserId(userId);
-            user.setPassword(password);
-            user.setName(name);
+            System.out.print("Enter your password: ");
+            user.setPassword(scanner.nextLine());
+
+            // Creation of a new user automatically initializes an entry in the GamesCollectionManager
+            UserManager.addUser(user);
+
             System.out.println("Registration successful. Please log in.");
         } else {
-            System.out.println("User ID already in use.");
+            System.out.println("Username already in use.");
         }
     }
     //private void
-    public boolean showMenu() {
+    public static boolean showMenu(String username) {
         while (true) {
-            System.out.println("Welcome to the game collection app.");
+            System.out.println("Welcome " + username + " to the game collection app.");
             System.out.println("1. View my games");
             System.out.println("2. Add a game");
             System.out.println("3. Remove a game");
@@ -97,13 +89,13 @@ public class LogIn {
 
             switch (choice) {
                 case "1":
-                    viewGames();
+                    viewGames(username);
                     break;
                 case "2":
-                    addGame();
+                    addGame(username);
                     break;
                 case "3":
-                    removeGame();
+                    removeGame(username);
                     break;
                 case "4":
                     System.out.println("Logging out...");
@@ -115,20 +107,18 @@ public class LogIn {
         }
     }
 
-    private void viewGames() {
+    private static void viewGames(String username) {
         // Display the user's game collection
+        UserManager.getGamesCollectionByUsername(username);
 
     }
 
-    private void addGame() {
+    private static void addGame(String username) {
         // Add a game to the user's collection
     }
 
-    private void removeGame() {
+    private static void removeGame(String username) {
         // Remove a game from the user's collection
-    }
-    public <InputStream> void setInputSource(InputStream inputStream) {
-        this.scanner = new Scanner((Readable) inputStream);
     }
 }
 
