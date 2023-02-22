@@ -15,9 +15,8 @@ public class GamesCollectionManager {
     // - Search by game ID
     public static void searchGame(String userID, String gameID) {
         GamesCollection gamesCollection = UserManager.getGamesCollection(userID);
-        boolean hasGame = gamesCollection.hasGame(gameID);
 
-        if (hasGame) {
+        if (gamesCollection.hasGame(gameID)) {
             System.out.println("User " + userID + " has the game " + gameID);
         } else {
             System.out.println("User " + userID + " doesn't have the game " + gameID);
@@ -31,8 +30,18 @@ public class GamesCollectionManager {
         GamesCollection gamesCollection = UserManager.getGamesCollection(userID);
         gamesCollection.addGame(gameID);
     }
-    // Update a game?
-    // - Nothing to update right now, only the game ID is stored
+
+    // Update a game
+    public static void updateGame(String userID, String gameID) {
+        GamesCollection gamesCollection = UserManager.getGamesCollection(userID);
+        if (gamesCollection.hasGame(gameID)) {
+            System.out.println("User " + userID + " has the game " + gameID);
+            // Update the stats of the game
+
+        } else {
+            System.out.println("User " + userID + " doesn't have the game " + gameID);
+        }
+    }
 
     // Remove a game
     // - Remove the game ID from the collection
