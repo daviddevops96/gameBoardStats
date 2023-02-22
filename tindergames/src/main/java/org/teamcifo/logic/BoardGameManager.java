@@ -58,8 +58,13 @@ public class BoardGameManager {
     }
 
     // TODO:
-    public static void listAllBoardgames(){
+    public static void listAllBoardgames() {
         // the user can browse the whole boardGames DB.
         // Some sorting can be defined if wanted
+    }
+
+    public static void printGame(String gameID) {
+        // TODO: Pretty print a game based on its gameID
+        // Depends on the DB implementation
     }
 }

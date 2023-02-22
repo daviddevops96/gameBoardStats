@@ -9,8 +9,5 @@
 # Quarto
 **/_site
 
-# Java outputs
-**/target
-
 # Vim
 **/*.swp
