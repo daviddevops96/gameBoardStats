@@ -18,11 +18,6 @@ public class UserManager{
 
     private static Map<String, User> users = new HashMap<>();
 
-    /*
-    public UserManager(){
-        this.users= new HashMap<>();
-    }
-*/
     public static GamesCollection getGamesCollection(String userID) {
         // TODO: Correctly access the userID gamesCollection once User class is implemented
         return new GamesCollection();
@@ -56,7 +51,7 @@ public class UserManager{
 
     public static Map<String,User> getAllUsers() { return users; }
 
-    public static void Clear(){
+    public static void clear(){
         users.clear();
     }
 

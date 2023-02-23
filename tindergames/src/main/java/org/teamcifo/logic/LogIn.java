@@ -4,7 +4,7 @@ import org.teamcifo.domain.User;
 import java.util.Scanner;
 
 public class LogIn {
-    private static Scanner scanner = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
 
     public static void demo() {
         // TODO:
@@ -36,7 +36,7 @@ public class LogIn {
         }
     }
 
-    private static void login() {
+    static void login() {
         System.out.print("Enter your username: ");
         String username = scanner.nextLine();
         System.out.print("Enter your password: ");
@@ -50,7 +50,7 @@ public class LogIn {
         }
     }
 
-    private static void register() {
+    static void register() {
         System.out.print("Enter a username: ");
         String username = scanner.nextLine();
 
@@ -115,10 +115,16 @@ public class LogIn {
 
     private static void addGame(String username) {
         // Add a game to the user's collection
+
     }
 
     private static void removeGame(String username) {
         // Remove a game from the user's collection
+
+    }
+
+    public static void setScanner(Scanner scanner) {
+        LogIn.scanner = scanner;
     }
 }
 
